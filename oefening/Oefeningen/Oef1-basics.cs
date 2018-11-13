@@ -29,29 +29,6 @@ namespace First
 	 *   op het scherm toont via Console.WriteLine().
 	 */
 
-	public class Customer
-	{
-		public string FirstName { get; set; }
-		public string LastName { get; set; }
-		public DateTime DateOfBirth { get; set; }
-
-		public int Age()
-		{
-			return DateTime.Now.Year - DateOfBirth.Year;
-		}
-
-		public string Name()
-		{
-			return FirstName + " " + LastName;
-		}
-
-		public void Print()
-		{
-			Console.WriteLine("Name: " + Name());
-			Console.WriteLine("Age: " + Age());
-		}
-	}
-
 	/* Oefening 2
 	 * 
 	 * Maak een class Book met de volgende properties:
@@ -68,26 +45,6 @@ namespace First
 	 *   
 	 */   
 
-	public class Book
-	{
-		public string Title { get; set; }
-		public string Author { get; set; }
-		public int RequiredAge { get; set; }
-
-		public bool AllowedToRead(Customer customer)
-		{
-			if (customer.Age() >= RequiredAge) return true;
-			return false;
-		}
-
-		public void Print()
-		{
-			Console.WriteLine("Title: " + Title);
-			Console.WriteLine("Author: " + Author);
-			Console.WriteLine("RequiredAge: " + RequiredAge);
-		}
-	}
-
 	/* Oefening 3
 	 * 
 	 * Maak een class Transaction met de volgende properties
@@ -103,27 +60,5 @@ namespace First
 	 *   boek, de naam van de ontlener en de datum waarop het boek
 	 *   uitgeleend werd.
 	 */
-
-	public class Transaction
-	{
-		public Book Book { get; set; }
-		public Customer Customer { get; set; }
-		public DateTime LoanDate { get; set; }
-
-		public bool IsLoanExpired()
-		{
-			var interval = DateTime.Now - LoanDate;
-			if(interval.Days > 21)
-			{
-				return true;
-			}
-			return false;
-		}
-
-		public void Print()
-		{
-			Console.WriteLine(Book.Title + " is borrowed by " + Customer.Name() + " on " + LoanDate.ToShortDateString());
-		}
-	}
 
 }

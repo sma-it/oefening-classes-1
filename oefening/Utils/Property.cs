@@ -48,7 +48,8 @@ namespace Utils
 			try
 			{
 				property.SetValue(instance, value);
-			} catch (ArgumentException e)
+			}
+			catch (ArgumentException e)
 			{
 				Console.ForegroundColor = ConsoleColor.Red;
 				Console.WriteLine("Using your property "
@@ -60,7 +61,7 @@ namespace Utils
 					+ "\n");
 				Console.ForegroundColor = ConsoleColor.White;
 			}
-		}	
+		}
 
 		public object Get()
 		{

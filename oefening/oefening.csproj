@@ -52,7 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Oefeningen\Oef2-ScoreBoard.cs" />
     <Compile Include="Utils\Menu.cs" />
     <Compile Include="Utils\Object.cs" />
     <Compile Include="Oefeningen\Oef1-basics.cs" />
@@ -61,6 +60,7 @@
     <Compile Include="Test.cs" />
     <Compile Include="Utils\Property.cs" />
     <Compile Include="Utils\Method.cs" />
+    <Compile Include="Utils\Validator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

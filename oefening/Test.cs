@@ -29,7 +29,7 @@ namespace Tests
 			var person = new Utils.Object("First.Person");
 			if(person.AssertClass())
 			{
-				person.AssertProperty("FirstName", Utils.PropertyType.ReadWrite, typeof(string));
+				person.AssertProperty("FirstName", Utils.PropertyAccess.ReadWrite, typeof(string));
 			}
 		}
 
@@ -39,7 +39,7 @@ namespace Tests
 			var person = new Utils.Object("First.Person");
 			if (person.AssertClass())
 			{
-				person.AssertProperty("LastName", Utils.PropertyType.ReadWrite, typeof(string));
+				person.AssertProperty("LastName", Utils.PropertyAccess.ReadWrite, typeof(string));
 			}
 		}
 	}
@@ -53,7 +53,7 @@ namespace Tests
 			var person = new Utils.Object("First.Person");
 			if (person.AssertClass())
 			{
-				person.AssertProperty("DateOfBirth", Utils.PropertyType.ReadWrite, typeof(DateTime));
+				person.AssertProperty("DateOfBirth", Utils.PropertyAccess.ReadWrite, typeof(DateTime));
 			}
 		}
 
@@ -106,7 +106,7 @@ namespace Tests
 			var board = new Utils.Object("First.ScoreBoard");
 			if(board.AssertClass())
 			{
-				board.AssertProperty("Player1Score", Utils.PropertyType.ReadOnly, typeof(int));
+				board.AssertProperty("Player1Score", Utils.PropertyAccess.ReadOnly, typeof(int));
 			}
 		}
 
@@ -116,7 +116,7 @@ namespace Tests
 			var board = new Utils.Object("First.ScoreBoard");
 			if (board.AssertClass())
 			{
-				board.AssertProperty("Player2Score", Utils.PropertyType.ReadOnly, typeof(int));
+				board.AssertProperty("Player2Score", Utils.PropertyAccess.ReadOnly, typeof(int));
 			}
 		}
 
@@ -126,7 +126,7 @@ namespace Tests
 			var board = new Utils.Object("First.ScoreBoard");
 			if (board.AssertClass())
 			{
-				board.AssertProperty("Player1Name", Utils.PropertyType.ReadWrite, typeof(string));
+				board.AssertProperty("Player1Name", Utils.PropertyAccess.ReadWrite, typeof(string));
 			}
 		}
 
@@ -136,7 +136,7 @@ namespace Tests
 			var board = new Utils.Object("First.ScoreBoard");
 			if (board.AssertClass())
 			{
-				board.AssertProperty("Player2Name", Utils.PropertyType.ReadWrite, typeof(string));
+				board.AssertProperty("Player2Name", Utils.PropertyAccess.ReadWrite, typeof(string));
 			}
 		}
 

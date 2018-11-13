@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace Utils
 {
-	public enum PropertyType
+	public enum PropertyAccess
 	{
 		ReadOnly,
 		WriteOnly,
@@ -18,8 +17,15 @@ namespace Utils
 	{
 		private Type type = null;
 		private object instance = null;
+		public object Instance => instance;
+
 		private bool valid;
 		public bool IsValid => valid;
+
+		public static Type GetClassType(string className)
+		{
+			return System.Reflection.Assembly.GetExecutingAssembly().GetType(className, false);
+		}
 
 		public static bool DoesClassExist(string className)
 		{
@@ -36,7 +42,7 @@ namespace Utils
 			return constructor != null;
 		}
 
-		public Object(string name) : this(name, new object[0]) {}
+		public Object(string name) : this(name, new object[0]) { }
 
 		public Object(string name, object[] arguments)
 		{
@@ -46,7 +52,8 @@ namespace Utils
 				try
 				{
 					instance = Activator.CreateInstance(type, arguments);
-				} catch (MissingMethodException e)
+				}
+				catch (MissingMethodException e)
 				{
 					Console.ForegroundColor = ConsoleColor.Red;
 					Console.WriteLine("Creating the class "
@@ -75,13 +82,23 @@ namespace Utils
 			return new Property(property, instance);
 		}
 
+		public bool HasMethod(string name, Type argType)
+		{
+			return HasMethod(name, new Type[] { argType });
+		}
+
 		public bool HasMethod(string name, Type[] argTypes = null)
 		{
-			var method = 
-				argTypes == null 
-				?	instance.GetType().GetMethod(name)
+			var method =
+				argTypes == null
+				? instance.GetType().GetMethod(name)
 				: instance.GetType().GetMethod(name, argTypes);
 			return method != null;
+		}
+
+		public Method Method(string name, Type argType)
+		{
+			return Method(name, new Type[] { argType });
 		}
 
 		public Method Method(string name, Type[] argTypes = null)
@@ -105,19 +122,19 @@ namespace Utils
 			return IsValid;
 		}
 
-		public void AssertProperty(string name, PropertyType propertyType, Type type)
+		public void AssertProperty(string name, PropertyAccess propertyType, Type type)
 		{
 			Assert.That(HasProperty(name), Is.True, "Property " + name + " does not exist");
 			Assert.That(Prop(name)?.HasType(type), Is.True, "Property " + name + " does not have the correct type");
-      switch (propertyType)
+			switch (propertyType)
 			{
-				case PropertyType.ReadOnly:
+				case PropertyAccess.ReadOnly:
 					Assert.That(Prop(name)?.IsReadOnly(), Is.True, "Property " + name + " should be read only");
 					break;
-				case PropertyType.WriteOnly:
+				case PropertyAccess.WriteOnly:
 					Assert.That(Prop(name)?.IsWriteOnly(), Is.True, "Property " + name + " should be write only");
 					break;
-				case PropertyType.ReadWrite:
+				case PropertyAccess.ReadWrite:
 					Assert.That(Prop(name)?.IsReadWrite(), Is.True, "Property " + name + " should be read-write");
 					break;
 			}
